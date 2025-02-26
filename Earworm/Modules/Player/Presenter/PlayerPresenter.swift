@@ -90,8 +90,6 @@ class PlayerPresenter {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
             try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Erro ao configurar reprodução em background: \(error.localizedDescription)")
-        }
+        } catch {}
     }
 }

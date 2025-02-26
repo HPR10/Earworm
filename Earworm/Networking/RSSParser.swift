@@ -21,15 +21,12 @@ class RSSParser {
             case .success(let feed):
                 switch feed {
                 case .rss(let rssFeed):
-                    print("✅ Parsing RSS Feed com sucesso!")
                     let convertedFeed = self.convertToRSSFeed(rssFeed)
                     completion(convertedFeed)
                 default:
-                    print("⚠️ Tipo de feed não suportado")
                     completion(nil)
                 }
             case .failure(let error):
-                print("❌ Erro ao parsear XML: \(error.localizedDescription)")  
                 completion(nil)
             }
         }

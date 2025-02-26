@@ -23,19 +23,15 @@ class NetworkService {
         AF.request(url).responseString { response in
             switch response.result {
             case .success(let xmlString):
-                print("📥 XML RECEBIDO:\n\(xmlString)") 
-                
                 let parser = RSSParser()
                 parser.parse(xmlString: xmlString) { feed in
                     if let feed = feed {
                         completion(.success(feed))
                     } else {
-                        print("❌ Erro ao parsear XML")
                         completion(.failure(NSError(domain: "RSSParserError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse RSS feed"])))
                     }
                 }
             case .failure(let error):
-                print("❌ Erro na requisição: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

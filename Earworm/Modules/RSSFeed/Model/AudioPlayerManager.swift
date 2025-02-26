@@ -30,9 +30,7 @@ class AudioPlayerManager {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
             try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Erro ao configurar o AVAudioSession: \(error.localizedDescription)")
-        }
+        } catch {}
     }
 
     func play(url: URL) {

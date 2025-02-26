@@ -55,10 +55,7 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
         title: "Baixar EP",
         backgroundColor: .systemBlue,
         cornerRadius: 10, textColor: .white,
-        image: UIImage(systemName: "arrow.down.circle"),
-        action: {
-            print("Download button tapped!")
-        }
+        image: UIImage(systemName: "arrow.down.circle")
     )
 
 

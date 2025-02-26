@@ -44,15 +44,10 @@ class RSSFeedViewController: UIViewController {
         title: "Limpar Cache",
         backgroundColor: .red,
         action: {
-            SDImageCache.shared.clear(with: .all) {
-                print("🗑 Cache Imagem limpo!")
-            }
-
+            SDImageCache.shared.clear(with: .all)
+            
             if let urlString = self.urlTextField.text, !urlString.isEmpty {
                 RSSCacheManager.clear(for: urlString)
-                print("🗑 Cache do RSS para \(urlString) limpo!")
-            } else {
-                print("⚠️ Nenhuma URL válida inserida para limpar o cache.")
             }
         }
     )
