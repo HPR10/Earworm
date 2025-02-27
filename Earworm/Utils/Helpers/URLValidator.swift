@@ -9,7 +9,9 @@ import Foundation
 
 struct URLValidator {
     static func isValid(_ urlString: String) -> Bool {
-        guard let url = URL(string: urlString) else { return false }
-        return url.scheme == "http" || url.scheme == "https"
+        guard let url = URLComponents(string: urlString) else { return false }
+        return (url.scheme == "http" || url.scheme == "https") && url.host != nil
     }
 }
+
+

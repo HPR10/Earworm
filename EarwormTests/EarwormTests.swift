@@ -6,30 +6,54 @@
 //
 
 import XCTest
+@testable import Earworm
 
 final class EarwormTests: XCTestCase {
 
+    //Setup e teardown (pode ser removido se não estiver usando)
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Executado antes de cada teste
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Executado depois de cada teste
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    // Teste de URL válida
+    func testValidUrls() {
+        XCTAssertTrue(URLValidator.isValid("https://example.com"))
+        XCTAssertTrue(URLValidator.isValid("http://www.example.com"))
+        XCTAssertTrue(URLValidator.isValid("https://example.com:443"))
+        XCTAssertTrue(URLValidator.isValid("http://www.example.com:8080"))
+        XCTAssertTrue(URLValidator.isValid("https://example.com/path?query=teste#section"))
+        XCTAssertTrue(URLValidator.isValid("https://example.com/ação?busca=áéíóú"))
+        XCTAssertTrue(URLValidator.isValid("http://192.168.1.1"))
     }
 
+    // Teste de URL inválida
+    func testInvalidUrls() {
+        XCTAssertFalse(URLValidator.isValid("example.com"))
+        XCTAssertFalse(URLValidator.isValid("www.example.com/path"))
+        XCTAssertFalse(URLValidator.isValid("htp://example.com"))
+        XCTAssertFalse(URLValidator.isValid("https:/exa mple.com"))
+        XCTAssertFalse(URLValidator.isValid("https:/example..com"))
+        XCTAssertFalse(URLValidator.isValid("ftp://example.com"))
+        XCTAssertFalse(URLValidator.isValid("http//example.com"))
+        XCTAssertFalse(URLValidator.isValid("https:/example.com"))
+        XCTAssertFalse(URLValidator.isValid("://example.com"))
+        XCTAssertFalse(URLValidator.isValid(""))
+        XCTAssertFalse(URLValidator.isValid(" "))
+        XCTAssertFalse(URLValidator.isValid("invalid-url"))
+        
+        // URLs maliciosas/inseguras (proteção contra injeção
+        XCTAssertFalse(URLValidator.isValid("javascript:alert(1)"))
+        XCTAssertFalse(URLValidator.isValid("data:text/html,<script>alert(1)</script>"))
+    }
+
+    // Teste de performance (opcional)
     func testPerformanceExample() throws {
-        // This is an example of a performance test case.
         measure {
-            // Put the code you want to measure the time of here.
+            // Código para medir desempenho (pode ser apagado se não usar)
         }
     }
-
 }
