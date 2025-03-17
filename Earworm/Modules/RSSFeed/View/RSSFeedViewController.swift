@@ -13,8 +13,6 @@ class RSSFeedViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    private let cardView = CustomCardView()
-
     private let titleLabel: CustomLabel = {
         let label = CustomLabel(
             text: "Insira aqui a URL do RSS",
@@ -75,40 +73,31 @@ class RSSFeedViewController: UIViewController {
     // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(cardView)
 
-        cardView.addSubview(titleLabel)
-        cardView.addSubview(urlTextField)
-        cardView.addSubview(buttonStackView)
+        view.addSubview(titleLabel)
+        view.addSubview(urlTextField)
+        view.addSubview(buttonStackView)
 
         buttonStackView.addArrangedSubview(submitButton)
         buttonStackView.addArrangedSubview(clearCacheButton)
     }
     
     private func setupConstraints() {
-        cardView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.greaterThanOrEqualTo(180)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cardView.snp.top).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.leading.equalTo(15)
         }
         
         urlTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
 
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(urlTextField.snp.bottom).offset(20)
+            make.top.equalTo(urlTextField.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(20)
             make.height.equalTo(44)
         }
     }
